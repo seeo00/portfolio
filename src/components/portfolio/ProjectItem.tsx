@@ -1,16 +1,27 @@
 import Image from 'next/image';
 
 type ProjectItemProps = {
+  sectionTitle: string;
   title: string;
   period: string;
   description: string;
   imageSrc: string;
   liveLink: string;
-  codeLink: string;
+  codeLink?: string;
   tags: string[];
 };
 
-const ProjectItem = ({ title, period, description, imageSrc, liveLink, codeLink, tags }: ProjectItemProps) => {
+const ProjectItem = ({
+  sectionTitle,
+  title,
+  period,
+  description,
+  imageSrc,
+  liveLink,
+  codeLink,
+  tags,
+}: ProjectItemProps) => {
+  const linkLabel = sectionTitle === 'Work Experience' ? 'Visit Website' : 'Live Demo';
   return (
     <section className="grid grid-cols-1 lg:grid-cols-3 w-full border-t border-black">
       {/* 이미지 영역 */}
@@ -35,24 +46,26 @@ const ProjectItem = ({ title, period, description, imageSrc, liveLink, codeLink,
             href={liveLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-[90px] xl:w-[104px] flex justify-between items-center"
+            className="w-[100px] xl:w-[120px] flex justify-between items-center"
           >
-            View Live <span>→</span>
+            {linkLabel} <span>→</span>
           </a>
-          <a
-            href={codeLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-[90px] xl:w-[104px] flex justify-between items-center"
-          >
-            View Code <span>→</span>
-          </a>
+          {codeLink && (
+            <a
+              href={codeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-[100px] xl:w-[120px] flex justify-between items-center"
+            >
+              View Code <span>→</span>
+            </a>
+          )}
         </div>
 
         {/* 태그 뱃지 */}
         <ul className="flex flex-wrap gap-2 text-xs xl:text-sm mt-5 lg:mt-3">
           {tags.map((tag, index) => {
-            const isProjectType = tag === 'Team Project' || tag === 'Personal Project';
+            const isProjectType = tag === 'Team' || tag === 'Personal' || tag === 'Commercial';
             return (
               <li key={index} className={`px-2 py-1 border border-black ${isProjectType ? 'bg-black text-white' : ''}`}>
                 {tag}

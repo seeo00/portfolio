@@ -107,7 +107,7 @@ const Header = ({ openMenu, closeMenu, isMenuOpen }: HeaderProps) => {
           </div>
         </button>
         <Link
-          href={'/'}
+          href="/"
           className="relative flex flex-col justify-end w-2/3 text-2xl sm:text-3xl text-center font-medium"
         >
           <div className="absolute left-1/2 -translate-x-1/2 transition-transform duration-500 translate-y-[0.5rem]">
